@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МИКС М</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #000;
+            color: white;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Оптимизация производительности */
+        .section {
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .section-content {
+            will-change: opacity, transform;
+        }
+
+        .nav-button {
+            will-change: transform;
+        }
+
+        /* Отключение анимаций на мобильных для лучшей производительности */
+        @media (max-width: 768px) {
+            .section {
+                background-attachment: scroll !important;
+            }
+            
+            .nav-button::before {
+                transition: none !important;
+            }
+            
+            .nav-button:hover::before {
+                transition: none !important;
+            }
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 8px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-text {
+                font-size: 16px;
+            }
+
+            .logo-text-m {
+                font-size: 24px;
+            }
+
+            .logo-helmet {
+                width: 40px;
+                height: 30px;
+                top: -28px;
+            }
+
+            .nav-buttons {
+                flex-direction: row;
+                gap: 8px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-button {
+                flex: 1;
+                padding: 8px 12px;
+                font-size: 14px;
+                min-width: auto;
+                border-radius: 20px;
+            }
+
+            .nav-button .material-icons {
+                font-size: 18px;
+            }
+
+            .section {
+                padding: 30px 15px;
+                min-height: 50vh;
+                background-attachment: scroll;
+            }
+
+            .section-content {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+
+            .section-text {
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+
+            .footer {
+                padding: 15px 8px;
+                text-align: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .footer-left {
+                font-size: 12px;
+            }
+
+            .footer-right {
+                font-size: 11px;
+            }
+
+            .privacy-link {
+                font-size: 11px;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 8px 5px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .logo-text-m {
+                font-size: 20px;
+            }
+
+            .logo-helmet {
+                width: 35px;
+                height: 26px;
+                top: -24px;
+            }
+
+            .nav-button {
+                padding: 6px 10px;
+                font-size: 12px;
+                border-radius: 15px;
+            }
+
+            .nav-button .material-icons {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 20px 10px;
+                min-height: 40vh;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 12px;
+            }
+
+            .section-text {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+
+            .footer {
+                padding: 12px 5px;
+            }
+
+            .footer-left {
+                font-size: 11px;
+            }
+
+            .footer-right {
+                font-size: 10px;
+            }
+
+            .privacy-link {
+                font-size: 10px;
+            }
+        }
+
+        /* Оптимизация для планшетов */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .section {
+                padding: 50px 25px;
+                min-height: 70vh;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .section-text {
+                font-size: 1.1rem;
+            }
+
+            .nav-button {
+                padding: 10px 20px;
+                font-size: 15px;
+            }
+        }
+
+        .header {
+            position: relative;
+            padding: 20px;
+            background-color: #4F8AFF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            position: relative;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            color: white;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            font-family: Arial, sans-serif;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .logo-text-m {
+            font-size: 32px;
+            margin-left: 5px;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            line-height: 0.8;
+            position: relative;
+        }
+
+        .logo-helmet {
+            position: absolute;
+            top: -34px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 52px;
+            height: 38px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-button {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #000;
+            background-color: #000;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            min-width: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            left: 20%;
+            top: 40%;
+            width: 8px;
+            height: 8px;
+            background: #4F8AFF;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .nav-button:hover::before {
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+        }
+
+        .nav-button span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-button .material-icons {
+            font-size: 24px;
+            margin-left: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: Arial, sans-serif;
+        }
+
+        .section-text {
+            font-size: 24px;
+            line-height: 1.6;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+
+        #section1 { background-image: url('assets/images/bg-section1.jpg'); }
+        #section2 { background-image: url('assets/images/bg-section2.jpg'); }
+        #section3 { background-image: url('assets/images/bg-section3.jpg'); }
+        #section4 { background-image: url('assets/images/bg-section4.jpg'); }
+        #section5 { background-image: url('assets/images/bg-section5.jpg'); }
+        #section6 { background-image: url('assets/images/bg-section2.jpg'); }
+        #section7 { background-image: url('assets/images/bg-section4.jpg'); }
+
+        .footer {
+            position: relative;
+            padding: 20px;
+            background: #000000;
+            text-align: center;
+            z-index: 1000;
+            border-top: 2px solid #333;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-left {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .footer-right {
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .privacy-link {
+            color: #666666;
+            text-decoration: none;
+            font-size: 12px;
+            margin-left: 20px;
+        }
+
+        .privacy-link:hover {
+            color: #999;
+        }
+
+        .security-info {
+            color: #777;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">
+            <span class="logo-text">микс <span class="logo-text-m">М
+                <svg class="logo-helmet" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="26" cy="33" rx="22" ry="5" fill="#222"/>
+                    <path d="M8 31V21C8 9 44 9 44 21V31" fill="#222"/>
+                    <rect x="22" y="3" width="8" height="15" rx="3" fill="#222"/>
+                    <line x1="15" y1="23" x2="15" y2="30" stroke="#4F8AFF" stroke-width="2"/>
+                    <line x1="26" y1="18" x2="26" y2="30" stroke="#4F8AFF" stroke-width="2"/>
+                    <line x1="37" y1="23" x2="37" y2="30" stroke="#4F8AFF" stroke-width="2"/>
+                </svg>
+            </span></span>
+        </a>
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="showPage('products')">
+                <span>товары</span>
+                <i class="material-icons">shopping_cart</i>
+            </button>
+            <button class="nav-button" onclick="showPage('contacts')">
+                <span>контакты</span>
+                <i class="material-icons">phone</i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="section1">
+            <div class="section-content">
+                <h2 class="section-title">Любой проект — под ключ:</h2>
+                <p class="section-text">
+                    От базовых материалов до современных станков.<br>
+                    Надёжно. Быстро. Без переплат.
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="section2">
+            <div class="section-content">
+                <h2 class="section-title">Широкий ассортимент</h2>
+                <p class="section-text">В наличии всё — от кирпича и цемента до станков, инструментов и крепежа.</p>
+            </div>
+        </section>
+
+        <section class="section" id="section3">
+            <div class="section-content">
+                <h2 class="section-title">Оперативная комплектация</h2>
+                <p class="section-text">Быстро собираем и отправляем заказы — без проволочек и задержек.</p>
+            </div>
+        </section>
+
+        <section class="section" id="section4">
+            <div class="section-content">
+                <h2 class="section-title">Гарантированное качество</h2>
+                <p class="section-text">Работаем только с проверенными производителями и поставщиками.</p>
+            </div>
+        </section>
+
+        <section class="section" id="section5">
+            <div class="section-content">
+                <h2 class="section-title">Надёжная доставка</h2>
+                <p class="section-text">Своя логистика — доставляем прямо до объекта в любом регионе России и СНГ.</p>
+            </div>
+        </section>
+
+        <section class="section" id="section6">
+            <div class="section-content">
+                <h2 class="section-title">Персональное сопровождение</h2>
+                <p class="section-text">Каждому клиенту — отдельный менеджер, который помогает с выбором и контролем заказа.</p>
+            </div>
+        </section>
+
+        <section class="section" id="section7">
+            <div class="section-content">
+                <h2 class="section-title">Поддержка после покупки</h2>
+                <p class="section-text">Помогаем советом, консультируем по эксплуатации и сервису.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div>© 2025 МИКС М. Все права защищены.</div>
+            </div>
+            <div class="footer-right">
+                <a href="privacy.html" class="privacy-link">политика конфиденциальности</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Наблюдатель за появлением секций
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        // Наблюдаем за всеми секциями
+        document.querySelectorAll('.section-content').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Функция для переключения страниц
+        function showPage(pageId) {
+            window.location.href = pageId + '.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МИКС М - Контакты</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body {
+            background: black url('assets/images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Оптимизация производительности */
+        .slogan-container {
+            will-change: opacity, transform;
+        }
+
+        .back-button {
+            will-change: transform;
+        }
+
+        /* Отключение анимаций на мобильных для лучшей производительности */
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll !important;
+            }
+            
+            .back-button:hover {
+                transform: none !important;
+            }
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .header {
+                height: auto;
+                padding: 12px 8px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-text-mix {
+                font-size: 16px;
+            }
+
+            .logo-text-m {
+                font-size: 20px;
+            }
+
+            .helmet-container svg {
+                width: 30px;
+                height: 22px;
+            }
+
+            .back-button {
+                padding: 8px 16px;
+                font-size: 14px;
+                border-radius: 20px;
+            }
+
+            .main-content {
+                padding: 20px 10px;
+                gap: 25px;
+            }
+
+            .info-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .contact-info, .schedule-info {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .info-title {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .contact-item {
+                gap: 12px;
+                margin-bottom: 15px;
+            }
+
+            .contact-icon {
+                font-size: 22px !important;
+            }
+
+            .contact-text, .contact-address {
+                font-size: 14px;
+            }
+
+            .schedule-row {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .slogan {
+                font-size: 24px;
+            }
+
+            .footer {
+                padding: 15px 8px;
+            }
+
+            .footer-left {
+                font-size: 12px;
+            }
+
+            .footer-right {
+                font-size: 11px;
+            }
+
+            .privacy-link {
+                font-size: 11px;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 8px 5px;
+            }
+
+            .logo-text-mix {
+                font-size: 14px;
+            }
+
+            .logo-text-m {
+                font-size: 18px;
+            }
+
+            .helmet-container svg {
+                width: 25px;
+                height: 18px;
+            }
+
+            .back-button {
+                padding: 6px 12px;
+                font-size: 12px;
+                border-radius: 15px;
+            }
+
+            .main-content {
+                padding: 15px 5px;
+                gap: 20px;
+            }
+
+            .contact-info, .schedule-info {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .info-title {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .contact-item {
+                gap: 10px;
+                margin-bottom: 12px;
+            }
+
+            .contact-icon {
+                font-size: 20px !important;
+            }
+
+            .contact-text, .contact-address {
+                font-size: 13px;
+            }
+
+            .schedule-row {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .slogan {
+                font-size: 20px;
+            }
+
+            .footer {
+                padding: 12px 5px;
+            }
+
+            .footer-left {
+                font-size: 11px;
+            }
+
+            .footer-right {
+                font-size: 10px;
+            }
+
+            .privacy-link {
+                font-size: 10px;
+            }
+        }
+
+        /* Оптимизация для планшетов */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .contact-info, .schedule-info {
+                padding: 25px;
+            }
+
+            .info-title {
+                font-size: 20px;
+            }
+
+            .contact-text, .contact-address {
+                font-size: 16px;
+            }
+
+            .schedule-row {
+                font-size: 16px;
+            }
+
+            .slogan {
+                font-size: 28px;
+            }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .header {
+            background-color: #4F8AFF;
+            height: 80px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 5px;
+        }
+
+        .logo-text-mix {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: lowercase;
+            -webkit-text-stroke: 1px black;
+        }
+
+        .logo-text-m {
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+            -webkit-text-stroke: 1px black;
+        }
+
+        .logo-m-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-text-m {
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .helmet-container {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .back-button {
+            background-color: black;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 2px solid black;
+        }
+
+        .back-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            left: 20%;
+            top: 40%;
+            height: 8px;
+            width: 8px;
+            border-radius: 8px;
+            background-color: #4F8AFF;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .back-button:hover {
+            color: white;
+        }
+
+        .back-button:hover::before {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #4F8AFF;
+        }
+
+        .back-button:hover i {
+            transform: translateX(-4px);
+        }
+
+        .back-button:active {
+            transform: scale(0.96);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .contact-info {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 30px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .schedule-info {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 30px;
+            padding: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .info-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .schedule-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 6px 0;
+            color: white;
+        }
+
+        .schedule-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            color: #4F8AFF;
+            font-size: 28px !important;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .contact-address {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.4;
+            color: white;
+        }
+
+
+        .slogan-container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        .slogan-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slogan {
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .footer {
+            position: relative;
+            padding: 20px;
+            background: #000000;
+            text-align: center;
+            z-index: 1000;
+            border-top: 2px solid #333;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-left {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .footer-right {
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .privacy-link {
+            color: #888888;
+            text-decoration: none;
+            font-size: 12px;
+            margin-left: 20px;
+        }
+
+        .privacy-link:hover {
+            color: #aaaaaa;
+        }
+
+        .email-link {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .info-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <span class="logo-text-mix">микс</span>
+            <div class="logo-m-container">
+                <div class="helmet-container">
+                    <svg width="40" height="30" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="26" cy="33" rx="22" ry="5" fill="#222"/>
+                        <path d="M8 31V21C8 9 44 9 44 21V31" fill="#222"/>
+                        <rect x="22" y="3" width="8" height="15" rx="3" fill="#222"/>
+                        <line x1="15" y1="23" x2="15" y2="30" stroke="#3498DB" stroke-width="2"/>
+                        <line x1="26" y1="18" x2="26" y2="30" stroke="#3498DB" stroke-width="2"/>
+                        <line x1="37" y1="23" x2="37" y2="30" stroke="#3498DB" stroke-width="2"/>
+                    </svg>
+                </div>
+                <span class="logo-text-m">М</span>
+            </div>
+        </div>
+        <a href="index.html" class="back-button">
+            <i class="material-icons">arrow_back</i>
+            назад
+        </a>
+    </header>
+
+    <main class="main-content">
+        <div class="info-container">
+            <div class="contact-info">
+                <h2 class="info-title">контактная информация:</h2>
+                <div class="contact-item">
+                    <i class="material-icons contact-icon">phone</i>
+                    <span class="contact-text">+7-912-287-75-12</span>
+                </div>
+                <div class="contact-item">
+                    <i class="material-icons contact-icon">email</i>
+                    <a href="mailto:ooo_mixm@mail.ru" class="contact-text email-link">ooo_mixm@mail.ru</a>
+                </div>
+                <div class="contact-item">
+                    <i class="material-icons contact-icon">location_on</i>
+                    <div class="contact-address">
+                        117452, город Москва,<br>
+                        Черноморский<br>
+                        б-р, д. 17 к. 1,<br>
+                        помещ. 4/2/5
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-info">
+                <h2 class="info-title">режим работы:</h2>
+                <div class="schedule-row">
+                    <span>пн-пт:</span>
+                    <span>8:00 - 19:00</span>
+                </div>
+                <div class="schedule-row">
+                    <span>сб:</span>
+                    <span>10:00-18:00</span>
+                </div>
+                <div class="schedule-row">
+                    <span>вс:</span>
+                    <span>выходной</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slogan-container">
+            <div class="slogan">
+                с вас звонок — с нас консультация!
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div>© 2025 МИКС М. Все права защищены.</div>
+            </div>
+            <div class="footer-right">
+                <a href="privacy.html" class="privacy-link">политика конфиденциальности</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Функция для проверки видимости элемента
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Функция для обработки прокрутки
+        function handleScroll() {
+            const slogan = document.querySelector('.slogan-container');
+            if (isElementInViewport(slogan)) {
+                slogan.classList.add('visible');
+                // Убираем обработчик после появления слогана
+                window.removeEventListener('scroll', handleScroll);
+            }
+        }
+
+        // Добавляем обработчик прокрутки
+        window.addEventListener('scroll', handleScroll);
+        // Проверяем видимость при загрузке страницы
+        handleScroll();
+    </script>
+</body>
+</html>
