@@ -1,4 +1,4 @@
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -22,17 +22,9 @@
         }
 
         /* Оптимизация производительности */
-        .section {
+        .section, .section-content, .nav-button {
             will-change: transform;
             transform: translateZ(0);
-        }
-
-        .section-content {
-            will-change: opacity, transform;
-        }
-
-        .nav-button {
-            will-change: transform;
         }
 
         /* Отключение анимаций на мобильных для лучшей производительности */
@@ -53,155 +45,129 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .header {
-                padding: 12px 8px;
-                flex-direction: column;
-                gap: 12px;
+                padding: 10px 15px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0;
+            }
+
+            .logo {
+                order: 1;
+                flex: 0;
             }
 
             .logo-text {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .logo-text-m {
-                font-size: 24px;
+                font-size: 18px;
             }
 
             .logo-helmet {
-                width: 40px;
-                height: 30px;
-                top: -28px;
+                width: 35px;
+                height: 25px;
+                top: -22px;
             }
 
             .nav-buttons {
+                order: 2;
                 flex-direction: row;
                 gap: 8px;
-                width: 100%;
-                justify-content: center;
+                width: auto;
+                justify-content: flex-end;
             }
 
             .nav-button {
-                flex: 1;
-                padding: 8px 12px;
+                flex: 0;
+                padding: 6px 12px;
                 font-size: 14px;
                 min-width: auto;
                 border-radius: 20px;
             }
 
-            .nav-button .material-icons {
-                font-size: 18px;
-            }
-
             .section {
                 padding: 30px 15px;
-                min-height: 50vh;
-                background-attachment: scroll;
             }
 
             .section-content {
                 max-width: 100%;
-                padding: 15px;
             }
 
             .section-title {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
                 margin-bottom: 15px;
             }
 
             .section-text {
-                font-size: 0.95rem;
+                font-size: 1rem;
                 line-height: 1.4;
             }
 
             .footer {
-                padding: 15px 8px;
-                text-align: center;
+                padding: 15px;
             }
 
             .footer-content {
                 flex-direction: column;
-                gap: 8px;
+                gap: 10px;
+                text-align: center;
             }
 
-            .footer-left {
+            .footer-text {
                 font-size: 12px;
-            }
-
-            .footer-right {
-                font-size: 11px;
             }
 
             .privacy-link {
                 font-size: 11px;
-                margin-left: 0;
             }
         }
 
         @media (max-width: 480px) {
             .header {
-                padding: 8px 5px;
+                padding: 8px 12px;
             }
 
             .logo-text {
-                font-size: 14px;
+                font-size: 12px;
             }
 
             .logo-text-m {
-                font-size: 20px;
-            }
-
-            .logo-helmet {
-                width: 35px;
-                height: 26px;
-                top: -24px;
-            }
-
-            .nav-button {
-                padding: 6px 10px;
-                font-size: 12px;
-                border-radius: 15px;
-            }
-
-            .nav-button .material-icons {
                 font-size: 16px;
             }
 
+            .logo-helmet {
+                width: 30px;
+                height: 22px;
+                top: -20px;
+            }
+
+            .nav-button {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
             .section {
-                padding: 20px 10px;
-                min-height: 40vh;
+                padding: 25px 12px;
             }
 
             .section-title {
-                font-size: 1.3rem;
-                margin-bottom: 12px;
+                font-size: 1.6rem;
             }
 
             .section-text {
-                font-size: 0.85rem;
-                line-height: 1.3;
-            }
-
-            .footer {
-                padding: 12px 5px;
-            }
-
-            .footer-left {
-                font-size: 11px;
-            }
-
-            .footer-right {
-                font-size: 10px;
-            }
-
-            .privacy-link {
-                font-size: 10px;
+                font-size: 0.9rem;
             }
         }
 
-        /* Оптимизация для планшетов */
         @media (max-width: 1024px) and (min-width: 769px) {
+            .header {
+                padding: 15px 20px;
+            }
+
             .section {
-                padding: 50px 25px;
-                min-height: 70vh;
+                padding: 50px 30px;
             }
 
             .section-title {
@@ -211,21 +177,20 @@
             .section-text {
                 font-size: 1.1rem;
             }
-
-            .nav-button {
-                padding: 10px 20px;
-                font-size: 15px;
-            }
         }
 
         .header {
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #4F8AFF;
             padding: 20px;
-            background-color: #4F8AFF;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
@@ -233,107 +198,100 @@
             align-items: center;
             text-decoration: none;
             color: white;
-            position: relative;
         }
 
         .logo-text {
-            font-size: 20px;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: white;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            font-family: Arial, sans-serif;
-            text-transform: lowercase;
-            letter-spacing: 0.05em;
-            display: flex;
-            align-items: baseline;
+            letter-spacing: 0.06em;
+            text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
+            position: relative;
         }
 
         .logo-text-m {
-            font-size: 32px;
-            margin-left: 5px;
-            text-transform: uppercase;
+            font-size: 2.7rem;
             font-weight: 900;
-            letter-spacing: 0.02em;
-            line-height: 0.8;
             position: relative;
         }
 
         .logo-helmet {
             position: absolute;
-            top: -34px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
             width: 52px;
             height: 38px;
+            z-index: 10;
         }
 
         .nav-buttons {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .nav-button {
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #000;
-            background-color: #000;
+            background: #000;
             color: white;
+            border: 2px solid #000;
             padding: 12px 24px;
-            border-radius: 30px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: bold;
-            min-width: 160px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
+            min-width: 140px;
+            justify-content: center;
         }
 
         .nav-button::before {
             content: '';
             position: absolute;
-            left: 20%;
-            top: 40%;
-            width: 8px;
-            height: 8px;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
             background: #4F8AFF;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            z-index: 1;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            z-index: -1;
         }
 
         .nav-button:hover::before {
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 30px;
+            width: 300px;
+            height: 300px;
         }
 
-        .nav-button span {
-            position: relative;
-            z-index: 2;
+        .nav-button:hover {
+            color: white;
+            border-color: #000;
         }
 
-        .nav-button .material-icons {
-            font-size: 24px;
-            margin-left: 5px;
-            position: relative;
-            z-index: 2;
+        .nav-button i {
+            font-size: 18px;
+        }
+
+        main {
+            margin-top: 100px;
         }
 
         .section {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 80px 20px;
-            position: relative;
+            justify-content: center;
+            background-attachment: fixed;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            padding: 80px 40px;
+            position: relative;
         }
 
         .section::before {
@@ -343,56 +301,72 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
         }
 
         .section-content {
             position: relative;
-            z-index: 1;
-            max-width: 1000px;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
         }
 
-        .section-content.visible {
+        .section.visible .section-content {
             opacity: 1;
             transform: translateY(0);
         }
 
         .section-title {
-            font-size: 48px;
+            font-size: 3rem;
             font-weight: bold;
             margin-bottom: 30px;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-family: Arial, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .section-text {
-            font-size: 24px;
+            font-size: 1.3rem;
             line-height: 1.6;
             color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            font-weight: bold;
-            font-family: Arial, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
-        #section1 { background-image: url('assets/images/bg-section1.jpg'); }
-        #section2 { background-image: url('assets/images/bg-section2.jpg'); }
-        #section3 { background-image: url('assets/images/bg-section3.jpg'); }
-        #section4 { background-image: url('assets/images/bg-section4.jpg'); }
-        #section5 { background-image: url('assets/images/bg-section5.jpg'); }
-        #section6 { background-image: url('assets/images/bg-section2.jpg'); }
-        #section7 { background-image: url('assets/images/bg-section4.jpg'); }
+        #section1 {
+            background-image: url('assets/images/bg-section1.jpg');
+        }
+
+        #section2 {
+            background-image: url('assets/images/bg-section2.jpg');
+        }
+
+        #section3 {
+            background-image: url('assets/images/bg-section3.jpg');
+        }
+
+        #section4 {
+            background-image: url('assets/images/bg-section4.jpg');
+        }
+
+        #section5 {
+            background-image: url('assets/images/bg-section5.jpg');
+        }
+
+        #section6 {
+            background-image: url('assets/images/bg-section1.jpg');
+        }
+
+        #section7 {
+            background-image: url('assets/images/bg-section2.jpg');
+        }
 
         .footer {
-            position: relative;
-            padding: 20px;
-            background: #000000;
+            background: #333333;
+            padding: 30px;
             text-align: center;
-            z-index: 1000;
-            border-top: 2px solid #333;
         }
 
         .footer-content {
